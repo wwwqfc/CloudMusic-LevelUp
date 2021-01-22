@@ -147,9 +147,11 @@ class CloudMusic:
             if ret['code'] != 200:
                 print("获取推荐歌曲失败 " + str(ret['code']) + "：" + ret['message'])
             else:
+                print("获取推荐歌曲成功 " )
                 lists = ret['recommend']
                 musicLists = [(d['id']) for d in lists]
         else:
+            print("使用自定义歌单" )
             musicLists = custom
         musicId = []
         for m in musicLists:
@@ -164,6 +166,7 @@ class CloudMusic:
             ret = json.loads(res.text)
             for i in ret['playlist']['trackIds']:
                 musicId.append(i['id'])
+                print("开始播放第"+str(i)+"首歌曲")
         # print("歌单大小：{musicCount}首\n".format(musicCount=len(musicId)))
         postData = json.dumps({
             'logs':
