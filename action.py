@@ -154,7 +154,7 @@ class CloudMusic:
             print("使用自定义歌单" )
             musicLists = custom
         musicId = []
-        mosicCount = 1
+        mosicCount = 0
         for m in musicLists:
             res = self.session.post(url=url,
                                     data=self.enc.encrypt(
@@ -167,8 +167,8 @@ class CloudMusic:
             ret = json.loads(res.text)
             for i in ret['playlist']['trackIds']:
                 musicId.append(i['id'])
-                print("开始播放第"+str(mosicCount)+"首歌曲")
                 mosicCount = mosicCount + 1
+        print("播放列表共获取到"+str(mosicCount)+"首歌曲")
         # print("歌单大小：{musicCount}首\n".format(musicCount=len(musicId)))
         postData = json.dumps({
             'logs':
